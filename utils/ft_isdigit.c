@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 11:55:10 by mac               #+#    #+#             */
-/*   Updated: 2021/04/18 11:55:51 by mac              ###   ########.fr       */
+/*   Created: 2021/04/18 13:13:34 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/04/18 13:13:37 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/utils.h"
-
-void	ft_putendl_fd(char *s)
+int		ft_isdigit(int c)
 {
-	int	i;
-
-	i = 0;
-	if (s == NULL)
-		return ;
-	while (s[i] != '\0')
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-	write(1, "\n", 1);
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }

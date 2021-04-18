@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 13:00:12 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/04/17 15:06:11 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/04/18 15:02:24 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,51 +209,62 @@ void        rotate_ab(stack **a, stack **b)
     rotate_b(b);
 }
 
-void        print_stack(stack *s)
+void        print_stack(stack *a, stack *b)
 {
-    stack *tmp;
+    stack *tmp1;
+    stack *tmp2;
 
-    tmp  = s;
+    tmp1  = a;
+    tmp2 = b;
     printf("---------------\n");
-    while (tmp)
+    while (tmp1)
     {
-        printf("%d\n", tmp->value);
-        tmp = tmp->next;
+        if (tmp1 && tmp2)
+            printf("%d\t\t\t%d\n", tmp1->value, tmp2->value);
+        if (!tmp1 && tmp2)
+            printf("%s\t\t\t%d\n", " ", tmp2->value);
+        if (tmp1 && !tmp2)
+            printf("%d\t\t\t%s\n", tmp1->value, " ");
+        tmp1 = tmp1->next;
+        if (tmp2)
+            tmp2 = tmp2->next;
     }
     printf("---------------\n");
 }
 
-int main()
-{
-    int p;
-    
-    stack *a, *b;
-    a = NULL;
-    b = NULL;
 
-    push(&a,12);
-    push(&a, 6);
-    push(&a, 1);
-    
-    push(&b,10);
-    push(&b, 8);
-    push(&b, 2);
 
-    print_stack(a);
-    // print_stack(b);
-    rotate_ra(&a);
-    // sswap(&a, &b);
-    print_stack(a);
-    // print_stack(b);
-    // while ((p = pop(&a)) != MIN_INT)
-    // {
-    //     printf("p = %d\n", p);
-    // }
-    // printf("\n\n\n");
-    // while ((p = pop(&a)) != MIN_INT)
-    // {
-    //     printf("p = %d\n", p);
-    // }
+// int main()
+// {
+//     int p;
     
-    return (0);
-}
+//     stack *a, *b;
+//     a = NULL;
+//     b = NULL;
+
+//     push(&a,12);
+//     push(&a, 6);
+//     push(&a, 1);
+    
+//     push(&b,10);
+//     push(&b, 8);
+//     push(&b, 2);
+
+//     print_stack(a);
+//     // print_stack(b);
+//     rotate_ra(&a);
+//     // sswap(&a, &b);
+//     print_stack(a);
+//     // print_stack(b);
+//     // while ((p = pop(&a)) != MIN_INT)
+//     // {
+//     //     printf("p = %d\n", p);
+//     // }
+//     // printf("\n\n\n");
+//     // while ((p = pop(&a)) != MIN_INT)
+//     // {
+//     //     printf("p = %d\n", p);
+//     // }
+    
+//     return (0);
+// }

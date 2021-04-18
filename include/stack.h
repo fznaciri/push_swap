@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 01:30:47 by mac               #+#    #+#             */
-/*   Updated: 2021/04/18 01:30:51 by mac              ###   ########.fr       */
+/*   Updated: 2021/04/18 14:57:57 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ void    rotate_ra(stack **a);
 void    rotate_rb(stack **a);
 void    rotate_rab(stack **a, stack **b);
 void    rotate_ab(stack **a, stack **b);
-void    print_stack(stack *s);
+void    print_stack(stack *a, stack *b);
 
 #endif

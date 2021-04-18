@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_opadd_back.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 18:19:11 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/04/18 10:51:21 by mac              ###   ########.fr       */
+/*   Updated: 2021/04/18 14:08:02 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/utils.h"
+#include "../include/checker.h"
 
-void	ft_opadd_back(t_op **alst, t_op *new)
+void	ft_opadd_back(t_opr **alst, t_opr *new)
 {
-	t_op *tmp;
+	t_opr *tmp;
 
 	tmp = *alst;
 	if (tmp)

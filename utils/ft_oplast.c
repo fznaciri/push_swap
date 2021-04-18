@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_oplast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 10:50:40 by mac               #+#    #+#             */
-/*   Updated: 2021/04/18 10:54:57 by mac              ###   ########.fr       */
+/*   Updated: 2021/04/18 14:08:06 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/utils.h"
+#include "../include/checker.h"
 
-t_op	*ft_oplast(t_op *lst)
+t_opr	*ft_oplast(t_opr *lst)
 {
 	if (lst)
 		while (lst->next)
