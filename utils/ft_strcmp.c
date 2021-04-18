@@ -1,17 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 01:30:35 by mac               #+#    #+#             */
-/*   Updated: 2021/04/18 01:30:40 by mac              ###   ########.fr       */
+/*   Created: 2021/04/18 11:41:33 by mac               #+#    #+#             */
+/*   Updated: 2021/04/18 11:41:47 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/utils.h"
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+int		ft_strcmp(const char *s1, const char *s2)
+{
+	unsigned char	*cs1;
+	unsigned char	*cs2;
+	int				i;
 
-#endif
+	cs1 = (unsigned char*)s1;
+	cs2 = (unsigned char*)s2;
+	i = 0;
+	while (cs2[i] && cs1[i])
+	{
+		if (cs1[i] != cs2[i])
+			return (cs1[i] - cs2[i]);
+		i++;
+	}
+	return (cs1[i] - cs2[i]);
+}

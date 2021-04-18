@@ -1,17 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 01:30:35 by mac               #+#    #+#             */
-/*   Updated: 2021/04/18 01:30:40 by mac              ###   ########.fr       */
+/*   Created: 2021/04/18 11:48:29 by mac               #+#    #+#             */
+/*   Updated: 2021/04/18 11:48:39 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/utils.h"
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+char		*ft_strchr(const char *s, int c)
+{
+	int i;
 
-#endif
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c)
+			return (((char *)s) + i);
+		i++;
+	}
+	if (s[i] == c)
+		return (((char *)s) + i);
+	else
+		return (NULL);
+}
