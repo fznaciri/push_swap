@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_puterror.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 01:30:35 by mac               #+#    #+#             */
-/*   Updated: 2021/04/25 12:57:02 by mac              ###   ########.fr       */
+/*   Created: 2021/04/25 12:59:48 by mac               #+#    #+#             */
+/*   Updated: 2021/04/25 13:00:28 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/checker.h"
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-#include "stack.h"
-#include "checker.h"
-
-void sort3(stack **a);
-
-#endif
+void ft_puterror()
+{
+    ft_putendl_fd("Error", 2);
+    exit(1);    
+}

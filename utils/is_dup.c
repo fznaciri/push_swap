@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   is_dup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 01:30:35 by mac               #+#    #+#             */
-/*   Updated: 2021/04/25 12:57:02 by mac              ###   ########.fr       */
+/*   Created: 2021/04/25 13:05:35 by mac               #+#    #+#             */
+/*   Updated: 2021/04/25 13:06:27 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/checker.h"
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-#include "stack.h"
-#include "checker.h"
-
-void sort3(stack **a);
-
-#endif
+int     is_dup(char **av, int i)
+{
+    while (av[i + 1])
+    {
+        if (!ft_strcmp(av[i], av[i + 1]))
+            return 1;
+        i++;
+    }
+    return 0;
+}

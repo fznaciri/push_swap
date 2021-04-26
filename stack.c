@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 13:00:12 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/04/18 15:02:24 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:03:28 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,20 @@ void        print_stack(stack *a, stack *b)
     printf("---------------\n");
 }
 
+void    clear_stack(stack **s)
+{
+    stack *tmp;
 
+    if (*s)
+    {
+        while (*s)
+        {
+            tmp = *s;
+            *s = tmp->next;
+            free(tmp);
+        }
+    }
+}
 
 // int main()
 // {

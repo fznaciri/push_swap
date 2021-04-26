@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:19:44 by mac               #+#    #+#             */
-/*   Updated: 2021/04/18 15:07:38 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:05:57 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int is_op(char *s)
     return 0;  
 }
 
-void ft_puterror()
-{
-    ft_putendl_fd("Error", 2);
-    exit(1);    
-}
+// void ft_puterror()
+// {
+//     ft_putendl_fd("Error", 2);
+//     exit(1);    
+// }
 
 void process_op(stack **a, stack **b, t_opr *op)
 {
@@ -81,64 +81,64 @@ void process_op(stack **a, stack **b, t_opr *op)
 	}
 }
 
-void    clear_stack(stack **s)
-{
-    stack *tmp;
+// void    clear_stack(stack **s)
+// {
+//     stack *tmp;
 
-    if (*s)
-    {
-        while (*s)
-        {
-            tmp = *s;
-            *s = tmp->next;
-            free(tmp);
-        }
-    }
-} 
+//     if (*s)
+//     {
+//         while (*s)
+//         {
+//             tmp = *s;
+//             *s = tmp->next;
+//             free(tmp);
+//         }
+//     }
+// } 
 
-int     is_dup(char **av, int i)
-{
-    while (av[i + 1])
-    {
-        if (!ft_strcmp(av[i], av[i + 1]))
-            return 1;
-        i++;
-    }
-    return 0;
-}
+// int     is_dup(char **av, int i)
+// {
+//     while (av[i + 1])
+//     {
+//         if (!ft_strcmp(av[i], av[i + 1]))
+//             return 1;
+//         i++;
+//     }
+//     return 0;
+// }
 
-void check_errors(char **av, int ac)
-{
-    int i;
+// void check_errors(char **av, int ac)
+// {
+//     int i;
 
-    i = 0;
-    while (av[ac][i])
-    {
-            //av[ac][0] != '+' || av[ac][0] != '-' || 
-        if (!ft_isdigit(av[ac][i]))
-            ft_puterror();
-        i++;
-    }
-    if (is_dup(av, ac) || ft_atoi(av[ac]) >  MAX_INT || ft_atoi(av[ac]) <  MIN_INT)
-        ft_puterror();
-}
+//     i = 0;
+//     while (av[ac][i])
+//     {
+//             //av[ac][0] != '+' || av[ac][0] != '-' || 
+//         if (!ft_isdigit(av[ac][i]))
+//             ft_puterror();
+//         i++;
+//     }
+//     if (is_dup(av, ac) || ft_atoi(av[ac]) >  MAX_INT || ft_atoi(av[ac]) <  MIN_INT)
+//         ft_puterror();
+// }
 
-int     check_sort(stack *a, stack *b)
-{
-    stack *tmp;
+// int     check_sort(stack *a, stack *b)
+// {
+//     stack *tmp;
     
-    if (b)
-        return 0;
-    tmp = a;
-    while (tmp)
-    {
-        if (tmp->next && tmp->value > tmp->next->value)
-            return 0;
-        tmp = tmp->next;
-    }
-    return 1;
+//     if (b)
+//         return 0;
+//     tmp = a;
+//     while (tmp)
+//     {
+//         if (tmp->next && tmp->value > tmp->next->value)
+//             return 0;
+//         tmp = tmp->next;
+//     }
+//     return 1;
         
-}
+// }
 
 int main(int ac, char **av)
 {

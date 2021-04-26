@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   check_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 01:30:35 by mac               #+#    #+#             */
-/*   Updated: 2021/04/25 12:57:02 by mac              ###   ########.fr       */
+/*   Created: 2021/04/25 12:44:17 by mac               #+#    #+#             */
+/*   Updated: 2021/04/25 12:44:47 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/checker.h"
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-#include "stack.h"
-#include "checker.h"
-
-void sort3(stack **a);
-
-#endif
+int     check_sort(stack *a, stack *b)
+{
+    stack *tmp;
+    
+    if (b)
+        return 0;
+    tmp = a;
+    while (tmp)
+    {
+        if (tmp->next && tmp->value > tmp->next->value)
+            return 0;
+        tmp = tmp->next;
+    }
+    return 1;
+        
+}
