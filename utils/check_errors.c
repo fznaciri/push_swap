@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:04:27 by mac               #+#    #+#             */
-/*   Updated: 2021/04/25 13:05:09 by mac              ###   ########.fr       */
+/*   Updated: 2021/04/26 17:07:26 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void check_errors(char **av, int ac)
     i = 0;
     while (av[ac][i])
     {
-            //av[ac][0] != '+' || av[ac][0] != '-' || 
-        if (!ft_isdigit(av[ac][i]))
+        if (!(av[ac][0] == '+' || av[ac][0] == '-' || ft_isdigit(av[ac][i])))
             ft_puterror();
         i++;
     }

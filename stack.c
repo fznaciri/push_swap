@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 13:00:12 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/04/25 13:03:28 by mac              ###   ########.fr       */
+/*   Updated: 2021/04/26 16:02:15 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,13 @@ void    rotate_b(stack **a)
             tmp = tmp->next;
         }
     }
+}
+
+int    peek_s(const stack *stack)
+{
+    if (!stack)
+        return (MIN_INT);
+    return (stack->value);
 }
 
 void    rotate_ra(stack **a)
