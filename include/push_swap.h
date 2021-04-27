@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 01:30:35 by mac               #+#    #+#             */
-/*   Updated: 2021/04/26 15:26:02 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/04/27 00:19:32 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 
 void sort3(stack **a);
 void sort5(stack **a, stack **b);
-
+void	sort2(stack **a, stack **b);
+void	sort1(stack **a, stack **b);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:55:59 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/04/26 17:09:16 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/04/27 00:34:26 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	push_min(stack **a, stack **b, int i)
 	exec_opr(a, b, "pb");
 }
 
-void	sort(stack **a, stack **b)
+void	sort1(stack **a, stack **b)
 {
 	int	i;
 	
@@ -146,10 +146,25 @@ void	sort(stack **a, stack **b)
 	}
 	i = stack_min(*a);
 	push_min(a, b, i);
-	sort(a, b);
+	sort1(a, b);
 }
 
-//push it to stack b
+//psort method 2
+
+void	sort2(stack **a, stack **b)
+{
+	int k;
+	
+	while (stack_count(*a) > 0)
+	{
+		k = pop(a);
+		while (stack_count(*b) > 0 && (*b)->value > k)
+			push_a(a, b);
+		push(b, k);
+	}
+	while (stack_count(*b) > 0)
+		push_a(a, b);
+}
 
 
 int     main(int ac, char **av)
@@ -179,9 +194,9 @@ int     main(int ac, char **av)
         // else if (c == 5)
         //     sort5(&a, &b);
 		else
-			sort(&a, &b);
-		// printf("%d\n", stack_min(a));
+			sort2(&a, &b);
         print_stack(a, b);
+		// printf("%d\n", stack_min(a));
 		 clear_stack(&a);
 		 return 0;
     }
