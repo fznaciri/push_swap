@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 13:00:12 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/04/26 16:02:15 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:30:04 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int pop(stack **s)
     tmp = *s;
     result = tmp->value;
     *s = tmp->next;
-    //free(tmp);
+    free(tmp);
     return (result);
 }
 

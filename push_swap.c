@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:55:59 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/05/01 15:54:40 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:39:59 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,35 +191,48 @@ int get_last(stack *a)
 		a = a->next;
 	return (a->value);
 }
-
+int     is_valid(stack *s, int pivot)
+{
+    while (s)
+    {
+        if (s->value < pivot)
+            return (1);
+        s = s->next;
+    }
+    return (0);
+}
 void	half(stack **a, stack **b, int p)
 {
 	stack *tmp;
 	int last;
 	
 	tmp = *a;
-	while (tmp)
+	while (is_valid(*a, p))
 	{
-		last = get_last(tmp);
-		// printf("c : %d\n", tmp->value);
-		if (tmp->value < p)
+		last = get_last(*a);
+		if ((*a)->value < p)
 			exec_opr(a, b, "pb");
 		else if (last < p)
 		{
 			exec_opr(a, b,"rra");
 			exec_opr(a, b,"pb");
 		}	
-		else
+		else 
 			exec_opr(a, b,"ra");
-		tmp = tmp->next;
 	}
+	print_stack(*a, *b);
 }
 void sort(stack **a, stack **b)
 {
 	int p;
 	
+	printf("%d\n", stack_count(*a));
+	if (!(*a) || stack_count(*a) <= 2)
+		return ;
 	p = pivot(*a);
+	printf("%d\n", p);
 	half(a, b, p);
+	sort(a, b);
 }
 // void	sort1(stack **a, stack **b)
 // {
@@ -281,7 +294,7 @@ int     main(int ac, char **av)
         //     sort5(&a, &b);
 		else
 			sort(&a, &b);
-        // print_stack(a, b);
+        print_stack(a, b);
 		// printf("%d\n", stack_min(a));
 		// printf("%d\n",pivot(a));
 		 clear_stack(&a);
