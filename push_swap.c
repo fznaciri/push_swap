@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:55:59 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/04/27 00:34:26 by mac              ###   ########.fr       */
+/*   Updated: 2021/05/01 15:54:40 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    exec_opr(stack **a, stack **b, char *opr)
 {
-    ft_putendl_fd(opr, 1);
+    // ft_putendl_fd(opr, 1);
     do_opr(a, b, opr);
 }
 
@@ -135,36 +135,122 @@ void	push_min(stack **a, stack **b, int i)
 	exec_opr(a, b, "pb");
 }
 
-void	sort1(stack **a, stack **b)
-{
-	int	i;
+stack *copy(stack *a)
+{ 
+	stack *tmp;
+	stack *new;
 	
-	if (!(*a))
+	new = NULL;
+	tmp = a;
+	while(tmp)
 	{
-		exec_loop(a, b, "pa", stack_count(*b));	
-		return;
+		push(&new, tmp->value);
+		tmp = tmp->next;
 	}
-	i = stack_min(*a);
-	push_min(a, b, i);
-	sort1(a, b);
+	return new;
 }
+
+int pivot(stack *a)
+{
+	stack *tmp;
+	stack *tmp1;
+	stack *c;
+	int s;
+	int l; 
+	c = copy(a);
+	tmp1 = c;
+	while (tmp1)
+	{
+		tmp = c;
+		while (tmp)
+		{
+			if (tmp->next && tmp->value > tmp->next->value)
+			{
+				s = tmp->value;
+				tmp->value = tmp->next->value;
+				tmp->next->value = s;	
+			}
+			tmp = tmp->next;	
+		}
+		tmp1 = tmp1->next;
+	}
+	l = stack_count(a);
+	tmp = c;
+	s = 0;
+	while (tmp && s < l/2)
+	{
+		tmp = tmp->next;	
+		s++;
+	}
+	return (tmp->value);
+}
+
+int get_last(stack *a)
+{
+	while (a->next)
+		a = a->next;
+	return (a->value);
+}
+
+void	half(stack **a, stack **b, int p)
+{
+	stack *tmp;
+	int last;
+	
+	tmp = *a;
+	while (tmp)
+	{
+		last = get_last(tmp);
+		// printf("c : %d\n", tmp->value);
+		if (tmp->value < p)
+			exec_opr(a, b, "pb");
+		else if (last < p)
+		{
+			exec_opr(a, b,"rra");
+			exec_opr(a, b,"pb");
+		}	
+		else
+			exec_opr(a, b,"ra");
+		tmp = tmp->next;
+	}
+}
+void sort(stack **a, stack **b)
+{
+	int p;
+	
+	p = pivot(*a);
+	half(a, b, p);
+}
+// void	sort1(stack **a, stack **b)
+// {
+// 	int	i;
+	
+// 	if (!(*a))
+// 	{
+// 		exec_loop(a, b, "pa", stack_count(*b));	
+// 		return;
+// 	}
+// 	i = stack_min(*a);
+// 	push_min(a, b, i);
+// 	sort1(a, b);
+// }
 
 //psort method 2
 
-void	sort2(stack **a, stack **b)
-{
-	int k;
+// void	sort2(stack **a, stack **b)
+// {
+// 	int k;
 	
-	while (stack_count(*a) > 0)
-	{
-		k = pop(a);
-		while (stack_count(*b) > 0 && (*b)->value > k)
-			push_a(a, b);
-		push(b, k);
-	}
-	while (stack_count(*b) > 0)
-		push_a(a, b);
-}
+// 	while (stack_count(*a) > 0)
+// 	{
+// 		k = pop(a);
+// 		while (stack_count(*b) > 0 && (*b)->value > k)
+// 			push_a(a, b);
+// 		push(b, k);
+// 	}
+// 	while (stack_count(*b) > 0)
+// 		push_a(a, b);
+// }
 
 
 int     main(int ac, char **av)
@@ -194,9 +280,10 @@ int     main(int ac, char **av)
         // else if (c == 5)
         //     sort5(&a, &b);
 		else
-			sort2(&a, &b);
-        print_stack(a, b);
+			sort(&a, &b);
+        // print_stack(a, b);
 		// printf("%d\n", stack_min(a));
+		// printf("%d\n",pivot(a));
 		 clear_stack(&a);
 		 return 0;
     }
