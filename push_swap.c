@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:55:59 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/05/01 16:39:59 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/05/08 14:16:30 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    exec_opr(stack **a, stack **b, char *opr)
 {
-    // ft_putendl_fd(opr, 1);
+    ft_putendl_fd(opr, 1);
     do_opr(a, b, opr);
 }
 
@@ -157,6 +157,7 @@ int pivot(stack *a)
 	stack *c;
 	int s;
 	int l; 
+	
 	c = copy(a);
 	tmp1 = c;
 	while (tmp1)
@@ -191,6 +192,7 @@ int get_last(stack *a)
 		a = a->next;
 	return (a->value);
 }
+
 int     is_valid(stack *s, int pivot)
 {
     while (s)
@@ -201,6 +203,7 @@ int     is_valid(stack *s, int pivot)
     }
     return (0);
 }
+
 void	half(stack **a, stack **b, int p)
 {
 	stack *tmp;
@@ -215,22 +218,22 @@ void	half(stack **a, stack **b, int p)
 		else if (last < p)
 		{
 			exec_opr(a, b,"rra");
-			exec_opr(a, b,"pb");
+			// exec_opr(a, b,"pb");
 		}	
 		else 
 			exec_opr(a, b,"ra");
 	}
-	print_stack(*a, *b);
 }
+
 void sort(stack **a, stack **b)
 {
 	int p;
 	
-	printf("%d\n", stack_count(*a));
+	// printf("%d\n", stack_count(*a));
 	if (!(*a) || stack_count(*a) <= 2)
 		return ;
 	p = pivot(*a);
-	printf("%d\n", p);
+	// printf("%d\n", p);
 	half(a, b, p);
 	sort(a, b);
 }
@@ -266,12 +269,15 @@ void sort(stack **a, stack **b)
 // }
 
 
+
 int     main(int ac, char **av)
 {
     stack     *a;
     stack     *b;
     int         c;
-
+	int i;
+	
+	i = 0;
     a = NULL;
     b = NULL;
 	if(ac == 1)
@@ -294,7 +300,7 @@ int     main(int ac, char **av)
         //     sort5(&a, &b);
 		else
 			sort(&a, &b);
-        print_stack(a, b);
+        // print_stack(a, b);
 		// printf("%d\n", stack_min(a));
 		// printf("%d\n",pivot(a));
 		 clear_stack(&a);

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 13:00:12 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/05/01 16:30:04 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/05/08 14:14:23 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void    push_b(stack **a, stack **b)
 {
     int  t;
     
-    if (stack_count(*a) >= 1)
+    if (*a)
     {
         t = pop(a);
         push(b, t);
@@ -224,7 +224,7 @@ void        print_stack(stack *a, stack *b)
     tmp1  = a;
     tmp2 = b;
     printf("---------------\n");
-    while (tmp1)
+    while (tmp1 || tmp2)
     {
         if (tmp1 && tmp2)
             printf("%d\t\t\t%d\n", tmp1->value, tmp2->value);
@@ -232,7 +232,8 @@ void        print_stack(stack *a, stack *b)
             printf("%s\t\t\t%d\n", " ", tmp2->value);
         if (tmp1 && !tmp2)
             printf("%d\t\t\t%s\n", tmp1->value, " ");
-        tmp1 = tmp1->next;
+        if (tmp1)
+            tmp1 = tmp1->next;
         if (tmp2)
             tmp2 = tmp2->next;
     }
