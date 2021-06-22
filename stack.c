@@ -6,13 +6,13 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 13:00:12 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/05/08 14:14:23 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/22 19:30:56 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/stack.h"
 
-int push(stack **s, int value)
+int push(stack **s, int value, int chunk)
 {
     stack *new;
 
@@ -20,6 +20,7 @@ int push(stack **s, int value)
     if (!new)
         return (0);
     new->value = value;
+    new->chunk = chunk;
     new->next = *s;
     *s = new;
     return (1);
@@ -56,14 +57,16 @@ int     stack_count(stack *a)
 
 void    swap(stack **s)
 {
-    int t1, t2;
+    int t1, t2, c1, c2;
 
     if (stack_count(*s) > 1)
     {
+        c1 = (*s)->chunk;
         t1 = pop(s);
+        c2 = (*s)->chunk;
         t2 = pop(s);
-        push(s, t1);
-        push(s, t2);
+        push(s, t1, c1);
+        push(s, t2, c2);
     }
 }
 
@@ -73,25 +76,25 @@ void    sswap(stack **a, stack **b)
     swap(b);
 }
 
-void    push_a(stack **a, stack **b)
+void    push_a(stack **a, stack **b, int chunk)
 {
     int  t;
     
     if (stack_count(*b) >= 1)
     {
         t = pop(b);
-        push(a, t);
+        push(a, t, chunk);
     }
 }
 
-void    push_b(stack **a, stack **b)
+void    push_b(stack **a, stack **b, int chunk)
 {
     int  t;
     
     if (*a)
     {
         t = pop(a);
-        push(b, t);
+        push(b, t, chunk);
     }
 }
 
@@ -155,6 +158,7 @@ int    peek_s(const stack *stack)
 void    rotate_ra(stack **a)
 {
     int t;
+    int c;
     stack *tmp;
     stack *p;
     stack *new;
@@ -167,6 +171,7 @@ void    rotate_ra(stack **a)
             if (!tmp->next)
             {
                 t = tmp->value;
+                c = tmp->chunk;
                 p->next = NULL;
                 free(tmp);
                 break ;
@@ -174,13 +179,14 @@ void    rotate_ra(stack **a)
             p = tmp;
             tmp = tmp->next;
         }
-        push(a, t);
+        push(a, t, c);
     }
 }
 
 void    rotate_rb(stack **a)
 {
     int t;
+    int c;
     stack *tmp;
     stack *p;
     stack *new;
@@ -193,6 +199,7 @@ void    rotate_rb(stack **a)
             if (!tmp->next)
             {
                 t = tmp->value;
+                c = tmp->chunk;
                 p->next = NULL;
                 free(tmp);
                 break ;
@@ -200,7 +207,7 @@ void    rotate_rb(stack **a)
             p = tmp;
             tmp = tmp->next;
         }
-        push(a, t);
+        push(a, t, c);
     }
 }
 

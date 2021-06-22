@@ -6,16 +6,16 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:55:59 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/05/08 14:16:30 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/22 19:57:46 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/push_swap.h"
 
-void    exec_opr(stack **a, stack **b, char *opr)
+void    exec_opr(stack **a, stack **b, int chunk, char *opr)
 {
     ft_putendl_fd(opr, 1);
-    do_opr(a, b, opr);
+    do_opr(a, b, chunk, opr);
 }
 
 
@@ -23,11 +23,46 @@ void    exec_loop(stack **a, stack **b, char *opr, int i)
 {
     while (i > 0)
     {
-        exec_opr(a, b, opr);
+        exec_opr(a, b,0, opr);
         i--;
     }
 }
+int	is_chunkempty(stack *a, int chunk)
+{
+	stack	*tmp;
 
+	tmp = a;
+	while (tmp)
+	{
+		if (tmp->chunk == chunk)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+int	get_pofhigher(stack *a, int chunk)
+{
+	stack	*tmp;
+	int		max;
+	int		i;
+	int		p;
+
+	tmp = a;
+	max = tmp->value;
+	p = 0;
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->value > max && tmp->chunk == chunk)
+		{
+			max = tmp->value;
+			p = i;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (p);
+}
 // sort a stack of 3 elements
 void sort3(stack **a)
 {
@@ -59,7 +94,7 @@ void sort3(stack **a)
 }
 
 // find position of an elmt of b in a
-int find(stack *a, int n)
+int find_position(stack *a, int n)
 {
 	stack *tmp;
 	int i;
@@ -68,7 +103,7 @@ int find(stack *a, int n)
 	tmp = a;
 	while (tmp)
 	{
-		if (tmp->value > n)
+		if (tmp->value < n)
 			i++;
 		tmp = tmp->next;
 	}
@@ -96,44 +131,8 @@ int find(stack *a, int n)
 
 // find min value
 
-int stack_min(stack *a)
-{
-	stack *tmp;
-    int i;
-    int pos;
-    int min;
-	
-    i = 1;
-	tmp = a;
-	min = tmp->value;
-	while (tmp)
-	{
-		if (tmp->value <= min)
-		{
-			min = tmp->value;
-			pos = i; 
-		}
-		tmp = tmp->next;
-		i++;
-	}
-    return (pos);
-}
 
-//get it to top of stack a (either ra or rra depends on size of a)
-void	push_min(stack **a, stack **b, int i)
-{
-	int len;
 
-	len = stack_count(*a);
-	// print_stack(*a, *b);
-	// printf("i : %d\t\t count : %d\n", i, len);
-	if (i < len / 2)
-		exec_loop(a, b, "ra", i - 1);
-	else
-		exec_loop(a, b, "rra", len - i + 1);
-	// printf("%d\n", peek_s(*a));
-	exec_opr(a, b, "pb");
-}
 
 stack *copy(stack *a)
 { 
@@ -144,131 +143,109 @@ stack *copy(stack *a)
 	tmp = a;
 	while(tmp)
 	{
-		push(&new, tmp->value);
+		push(&new, tmp->value, tmp->chunk);
 		tmp = tmp->next;
 	}
 	return new;
 }
-
-int pivot(stack *a)
+int is_inrange(stack *a, t_range r)
 {
 	stack *tmp;
-	stack *tmp1;
-	stack *c;
-	int s;
-	int l; 
 	
-	c = copy(a);
-	tmp1 = c;
-	while (tmp1)
+	tmp = a;
+	while (tmp)
 	{
-		tmp = c;
-		while (tmp)
+		if (tmp->value >= r.s && tmp->value <= r.e)
+			return 1;
+		tmp = tmp->next;
+	}
+	return 0;
+}
+
+void	half(stack **a, stack **b, t_range r, int chunk)
+{
+	int l;
+	int n;
+
+	while (is_inrange(*a, r))
+	{
+		if ((*a)->value >= r.s && (*a)->value <= r.e)
+			exec_opr(a, b, chunk, "pb");
+		else
+			exec_opr(a, b, 0, "ra");
+	}
+}
+
+void first(stack **a, stack **b, int chunks)
+{
+	int l;
+	int chunk;
+	t_range r;
+	
+	l = stack_count(*a);
+	r.s = 0;
+	chunk = 1;
+	while (r.s < l)
+	{
+		r.e = r.s + (l / chunks);
+		half(a, b, r, chunk);
+		r.s += l / chunks;
+		chunk++;
+	}
+}
+
+void second(stack **a, stack **b, int chunks)
+{
+	int l;
+	int n;
+
+	while (*b && chunks > 0)
+	{
+		while (!is_chunkempty(*b, chunks))
 		{
-			if (tmp->next && tmp->value > tmp->next->value)
-			{
-				s = tmp->value;
-				tmp->value = tmp->next->value;
-				tmp->next->value = s;	
-			}
-			tmp = tmp->next;	
+			n = get_pofhigher(*b, chunks);
+			l = stack_count(*b);
+			if (n == 1)
+				exec_opr(a, b, 0, "sb");
+			else if (n >= (l / 2))
+				exec_loop(a, b, "rrb", l - n);
+			else
+				exec_loop(a, b, "rb", n);
+			exec_opr(a, b, chunks, "pa");
 		}
-		tmp1 = tmp1->next;
+		chunks--;
 	}
-	l = stack_count(a);
-	tmp = c;
-	s = 0;
-	while (tmp && s < l/2)
-	{
-		tmp = tmp->next;	
-		s++;
-	}
-	return (tmp->value);
 }
-
-int get_last(stack *a)
+void	sort(stack **a, stack **b)
 {
-	while (a->next)
-		a = a->next;
-	return (a->value);
+	int chunks;
+	int l;
+	
+	l = stack_count(*a);
+	if (l <= 100)
+		chunks = 5;
+	else 
+		chunks = 11;	
+	first(a, b, chunks);
+	second(a, b, chunks);
+	//
+	print_stack(*a, *b);
 }
 
-int     is_valid(stack *s, int pivot)
-{
-    while (s)
-    {
-        if (s->value < pivot)
-            return (1);
-        s = s->next;
-    }
-    return (0);
-}
-
-void	half(stack **a, stack **b, int p)
+void replace(stack **a)
 {
 	stack *tmp;
-	int last;
+	stack *c;
 	
+	c = copy(*a);
 	tmp = *a;
-	while (is_valid(*a, p))
+	while (tmp)
 	{
-		last = get_last(*a);
-		if ((*a)->value < p)
-			exec_opr(a, b, "pb");
-		else if (last < p)
-		{
-			exec_opr(a, b,"rra");
-			// exec_opr(a, b,"pb");
-		}	
-		else 
-			exec_opr(a, b,"ra");
+		tmp->value = find_position(c, tmp->value);
+		tmp = tmp->next;
 	}
+	clear_stack(&c);
 }
-
-void sort(stack **a, stack **b)
-{
-	int p;
-	
-	// printf("%d\n", stack_count(*a));
-	if (!(*a) || stack_count(*a) <= 2)
-		return ;
-	p = pivot(*a);
-	// printf("%d\n", p);
-	half(a, b, p);
-	sort(a, b);
-}
-// void	sort1(stack **a, stack **b)
-// {
-// 	int	i;
-	
-// 	if (!(*a))
-// 	{
-// 		exec_loop(a, b, "pa", stack_count(*b));	
-// 		return;
-// 	}
-// 	i = stack_min(*a);
-// 	push_min(a, b, i);
-// 	sort1(a, b);
-// }
-
-//psort method 2
-
-// void	sort2(stack **a, stack **b)
-// {
-// 	int k;
-	
-// 	while (stack_count(*a) > 0)
-// 	{
-// 		k = pop(a);
-// 		while (stack_count(*b) > 0 && (*b)->value > k)
-// 			push_a(a, b);
-// 		push(b, k);
-// 	}
-// 	while (stack_count(*b) > 0)
-// 		push_a(a, b);
-// }
-
-
 
 int     main(int ac, char **av)
 {
@@ -289,10 +266,13 @@ int     main(int ac, char **av)
         while (ac > 0)
     	{
         	check_errors(av, ac);
-        	if(!push(&a, ft_atoi(av[ac])))
+        	if(!push(&a, ft_atoi(av[ac]), 0))
             	ft_puterror();
         	ac--;  
     	}
+		//print_stack(a, b);
+		replace(&a);
+		//print_stack(a, b);
         c = stack_count(a);
         if (c == 3)
             sort3(&a);

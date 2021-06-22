@@ -6,13 +6,13 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 16:15:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/04/26 16:19:34 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/22 19:07:44 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker.h"
 
-void    do_opr(stack **a, stack **b, char *opr)
+void    do_opr(stack **a, stack **b, int chunk, char *opr)
 {
     if (!ft_strcmp(opr, "sa"))
         swap(a);
@@ -21,9 +21,9 @@ void    do_opr(stack **a, stack **b, char *opr)
     if (!ft_strcmp(opr, "ss"))
         sswap(a, b);
     if (!ft_strcmp(opr, "pa"))
-        push_a(a, b);
+        push_a(a, b, chunk);
     if (!ft_strcmp(opr, "pb"))
-        push_b(a, b);
+        push_b(a, b, chunk);
     if (!ft_strcmp(opr, "ra"))
         rotate_a(a);
     if (!ft_strcmp(opr, "rb"))

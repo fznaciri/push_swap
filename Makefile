@@ -6,7 +6,7 @@
 #    By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/18 01:48:09 by mac               #+#    #+#              #
-#    Updated: 2021/04/26 16:29:54 by fnaciri-         ###   ########.fr        #
+#    Updated: 2021/06/22 19:31:21 by fnaciri-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ all: $(NAME)
 
 $(NAME):
 	@$(C) $(CFLAG) $(SRC_P) -o $(NAME)
-	@$(C) $(CFLAG) $(SRC_C) -o checker
+	#@$(C) $(CFLAG) $(SRC_C) -o checker
 
 debug:
 	@$(C) -g -o $(NAME) $(SRC_P) -fsanitize=address

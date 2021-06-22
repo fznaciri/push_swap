@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 01:30:47 by mac               #+#    #+#             */
-/*   Updated: 2021/04/26 16:02:30 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/22 19:08:56 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,28 @@
 
 # define MIN_INT -2147483648
 
+typedef struct s_range
+{
+    int s;
+    int e;    
+} t_range;
+
 typedef struct s_node {
     int value;
+    int chunk; 
     struct s_node *next;
 } t_node;
 
 
 typedef t_node stack;
 
-int     push(stack **s, int value);
+int     push(stack **s, int value, int chunk);
 int     pop(stack **s);
 int     stack_count(stack *a);
 void    swap(stack **s);
 void    sswap(stack **a, stack **b);
-void    push_a(stack **a, stack **b);
-void    push_b(stack **a, stack **b);
+void    push_a(stack **a, stack **b, int chunk);
+void    push_b(stack **a, stack **b, int chunk);
 void    rotate_a(stack **a);
 void    rotate_b(stack **a);
 void    rotate_ra(stack **a);

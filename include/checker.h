@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 01:30:21 by mac               #+#    #+#             */
-/*   Updated: 2021/04/26 16:21:18 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/22 19:09:14 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ void ft_puterror();
 int     is_dup(char **av, int i);
 void check_errors(char **av, int ac);
 int     check_sort(stack *a, stack *b);
-void    do_opr(stack **a, stack **b, char *opr);
+void    do_opr(stack **a, stack **b, int chunk, char *opr);
 #endif
