@@ -6,7 +6,7 @@
 #    By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/18 01:48:09 by mac               #+#    #+#              #
-#    Updated: 2021/06/22 19:31:21 by fnaciri-         ###   ########.fr        #
+#    Updated: 2021/06/23 17:46:45 by fnaciri-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ SRC_P = push_swap.c stack.c utils/*.c
 all: $(NAME)
 
 $(NAME):
-	@$(C) $(CFLAG) $(SRC_P) -o $(NAME)
-	#@$(C) $(CFLAG) $(SRC_C) -o checker
+	@$(C) $(CFLAG) $(SRC_P) -o $(NAM
 
 debug:
 	@$(C) -g -o $(NAME) $(SRC_P) -fsanitize=address

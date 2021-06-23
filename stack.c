@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 13:00:12 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/22 19:30:56 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/23 16:32:54 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,13 @@ void    push_b(stack **a, stack **b, int chunk)
 void    rotate_a(stack **a)
 {
     int t;
+    int c;
     stack *tmp;
     stack *new;
 
     if (stack_count(*a) > 1)
     {
+        c = (*a)->chunk;
         t = pop(a);
         tmp = *a;
         while (tmp)
@@ -114,6 +116,7 @@ void    rotate_a(stack **a)
             {
                 new = malloc(sizeof(t_node));
                 new->value = t;
+                new->chunk = c;
                 new->next = NULL;
                 tmp->next = new;
                 break ;
@@ -126,11 +129,13 @@ void    rotate_a(stack **a)
 void    rotate_b(stack **a)
 {
     int t;
+    int c;
     stack *tmp;
     stack *new;
 
     if (stack_count(*a) > 1)
     {
+        c = (*a)->chunk;
         t = pop(a);
         tmp = *a;
         while (tmp)
@@ -139,6 +144,7 @@ void    rotate_b(stack **a)
             {
                 new = malloc(sizeof(t_node));
                 new->value = t;
+                new->chunk = c;
                 new->next = NULL;
                 tmp->next = new;
                 break ;
@@ -246,6 +252,21 @@ void        print_stack(stack *a, stack *b)
     }
     printf("---------------\n");
 }
+
+void        prints(stack *a)
+{
+    stack *tmp1;
+
+    tmp1  = a;
+    printf("---------------\n");
+    while (tmp1)
+    {
+        printf("value : %d\t\tchunk : %d\n", tmp1->value, tmp1->chunk);
+        tmp1 = tmp1->next;
+    }
+    printf("---------------\n");
+}
+
 
 void    clear_stack(stack **s)
 {

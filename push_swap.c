@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:55:59 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/22 19:57:46 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/23 17:13:40 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,35 @@ int	get_pofhigher(stack *a, int chunk)
 	}
 	return (p);
 }
+
+void push_min(stack **a, stack **b)
+{
+	stack	*tmp;
+	int		min;
+	int		i;
+	int		p;
+
+	tmp = *a;
+	min = tmp->value;
+	p = 0;
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->value < min)
+		{
+			min = tmp->value;
+			p = i;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	if (p > 2)
+		exec_loop(a, b, "rra", stack_count(*a) - p);
+	else
+		exec_loop(a, b, "ra", p);
+	exec_opr(a, b, 0, "pb");
+}
+ 
 // sort a stack of 3 elements
 void sort3(stack **a)
 {
@@ -73,27 +102,25 @@ void sort3(stack **a)
 	a1 = (*a)->value;
 	a2 = (*a)->next->value;
 	a3 = (*a)->next->next->value;
-	if (check_sort(*a, NULL))
-		return ;
 	if (a1 < a2 && a1 < a3 && a2 > a3)
 	{
-		swap(a);
-		rotate_a(a);
+		exec_opr(a, NULL, 0, "sa");
+		exec_opr(a, NULL, 0, "ra");
 	}
 	else if (a1 > a2 && a1 < a3 && a2 < a3)
-		swap(a);
+		exec_opr(a, NULL, 0, "sa");
 	else if (a1 > a2 && a1 > a3 && a2 < a3)
-		rotate_a(a);
+		exec_opr(a, NULL, 0, "ra");
 	else if (a1 > a2 && a1 > a3 && a2 > a3)
 	{
-		swap(a);
-		rotate_ra(a);
+		exec_opr(a, NULL, 0, "sa");
+		exec_opr(a, NULL, 0, "rra");
 	}	
 	else
-		rotate_ra(a);
+		exec_opr(a, NULL, 0, "rra");
 }
 
-// find position of an elmt of b in a
+
 int find_position(stack *a, int n)
 {
 	stack *tmp;
@@ -111,27 +138,14 @@ int find_position(stack *a, int n)
 }
 
 // sort a stack of 5 elements
-// void sort5(stack **a, stack **b)
-// {
-// 	int i;
-// 	int size;
-	
-// 	size = stack_count(*a);
-// 	push_b(a, b);
-// 	push_b(a, b);
-// 	sort3(a);
-// 	while (b)
-// 	{
-// 		i = find(*a, peak_s(*b));
-// 		if (i)
-		
-// 	}
-	
-// }
-
-// find min value
-
-
+void sort5(stack **a, stack **b)
+{
+	push_min(a, b);
+	push_min(a, b);
+	sort3(a);
+	exec_opr(a, b, 0, "pa");
+	exec_opr(a, b, 0, "pa");
+}
 
 
 stack *copy(stack *a)
@@ -148,6 +162,7 @@ stack *copy(stack *a)
 	}
 	return new;
 }
+
 int is_inrange(stack *a, t_range r)
 {
 	stack *tmp;
@@ -172,7 +187,7 @@ void	half(stack **a, stack **b, t_range r, int chunk)
 		if ((*a)->value >= r.s && (*a)->value <= r.e)
 			exec_opr(a, b, chunk, "pb");
 		else
-			exec_opr(a, b, 0, "ra");
+			exec_opr(a, b, chunk, "ra");
 	}
 }
 
@@ -184,7 +199,7 @@ void first(stack **a, stack **b, int chunks)
 	
 	l = stack_count(*a);
 	r.s = 0;
-	chunk = 1;
+	chunk = 0;
 	while (r.s < l)
 	{
 		r.e = r.s + (l / chunks);
@@ -199,7 +214,7 @@ void second(stack **a, stack **b, int chunks)
 	int l;
 	int n;
 
-	while (*b && chunks > 0)
+	while (*b && chunks >= 0)
 	{
 		while (!is_chunkempty(*b, chunks))
 		{
@@ -225,11 +240,12 @@ void	sort(stack **a, stack **b)
 	if (l <= 100)
 		chunks = 5;
 	else 
-		chunks = 11;	
+		chunks = 11;
+	//prints(*b);
 	first(a, b, chunks);
+	//prints(*b);
 	second(a, b, chunks);
-	//
-	print_stack(*a, *b);
+	//print_stack(*a, *b);
 }
 
 void replace(stack **a)
@@ -270,20 +286,19 @@ int     main(int ac, char **av)
             	ft_puterror();
         	ac--;  
     	}
-		//print_stack(a, b);
+		if (check_sort(a, NULL))
+			return 0;
 		replace(&a);
-		//print_stack(a, b);
         c = stack_count(a);
         if (c == 3)
             sort3(&a);
-        // else if (c == 5)
-        //     sort5(&a, &b);
+        else if (c == 5)
+            sort5(&a, &b);
 		else
 			sort(&a, &b);
-        // print_stack(a, b);
-		// printf("%d\n", stack_min(a));
-		// printf("%d\n",pivot(a));
-		 clear_stack(&a);
-		 return 0;
+		clear_stack(&a);
     }
+	while (1)
+		;
+	return 0;
 }
