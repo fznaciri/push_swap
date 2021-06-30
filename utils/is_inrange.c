@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   is_inrange.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:07:52 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/24 11:45:15 by fnaciri-         ###   ########.fr       */
+/*   Created: 2021/06/24 12:39:40 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/06/24 19:13:07 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 
-size_t	ft_strlen(const char *s)
+int	is_inrange(t_stack *a, t_range r)
 {
-	size_t	i;
+	t_stack	*tmp;
 
-	i = 0;
-	while (((char *)s)[i] != '\0')
-		i++;
-	return (i);
+	tmp = a;
+	while (tmp)
+	{
+		if (tmp->value >= r.s && tmp->value <= r.e)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

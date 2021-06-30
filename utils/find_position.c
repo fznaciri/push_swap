@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   find_position.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnaciri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:07:52 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/24 11:45:15 by fnaciri-         ###   ########.fr       */
+/*   Created: 2021/06/24 19:10:49 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/06/24 19:11:04 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 
-size_t	ft_strlen(const char *s)
+int	find_position(t_stack *a, int n)
 {
-	size_t	i;
+	t_stack	*tmp;
+	int		i;
 
 	i = 0;
-	while (((char *)s)[i] != '\0')
-		i++;
+	tmp = a;
+	while (tmp)
+	{
+		if (tmp->value < n)
+			i++;
+		tmp = tmp->next;
+	}
 	return (i);
 }

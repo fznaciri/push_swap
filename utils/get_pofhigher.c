@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   get_pofhigher.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:07:52 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/24 11:45:15 by fnaciri-         ###   ########.fr       */
+/*   Created: 2021/06/24 12:42:29 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/06/24 19:12:14 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 
-size_t	ft_strlen(const char *s)
+int	get_pofhigher(t_stack *a, int chunk)
 {
-	size_t	i;
+	t_stack	*tmp;
+	int		max;
+	int		i;
+	int		p;
 
+	tmp = a;
+	max = tmp->value;
+	p = 0;
 	i = 0;
-	while (((char *)s)[i] != '\0')
+	while (tmp)
+	{
+		if (tmp->value > max && tmp->chunk == chunk)
+		{
+			max = tmp->value;
+			p = i;
+		}
+		tmp = tmp->next;
 		i++;
-	return (i);
+	}
+	return (p);
 }

@@ -6,11 +6,11 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 13:13:34 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/04/18 13:13:37 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/24 11:36:37 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)
 		return (1);

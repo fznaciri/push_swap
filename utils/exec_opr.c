@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   exec_opr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:07:52 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/24 11:45:15 by fnaciri-         ###   ########.fr       */
+/*   Created: 2021/06/24 12:43:55 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/06/30 15:41:04 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 
-size_t	ft_strlen(const char *s)
+void	exec_opr(t_stack **a, t_stack **b, int chunk, char *opr)
 {
-	size_t	i;
-
-	i = 0;
-	while (((char *)s)[i] != '\0')
-		i++;
-	return (i);
+	ft_putendl_fd(opr, 1);
+	do_opr(a, b, chunk, opr);
 }

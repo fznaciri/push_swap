@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 18:19:11 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/04/18 14:08:02 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/24 11:37:12 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_opadd_back(t_opr **alst, t_opr *new)
 {
-	t_opr *tmp;
+	t_opr	*tmp;
 
 	tmp = *alst;
 	if (tmp)

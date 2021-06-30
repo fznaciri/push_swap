@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   push_min.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:07:52 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/24 11:45:15 by fnaciri-         ###   ########.fr       */
+/*   Created: 2021/06/24 19:13:21 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/06/24 19:29:09 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 
-size_t	ft_strlen(const char *s)
+void	push_min(t_stack **a, t_stack **b)
 {
-	size_t	i;
+	t_stack	*tmp;
+	int		min;
+	int		i;
+	int		p;
 
+	tmp = *a;
+	min = tmp->value;
+	p = 0;
 	i = 0;
-	while (((char *)s)[i] != '\0')
+	while (tmp)
+	{
+		if (tmp->value < min)
+		{
+			min = tmp->value;
+			p = i;
+		}
+		tmp = tmp->next;
 		i++;
-	return (i);
+	}
+	if (p > 2)
+		exec_loop(a, b, "rra", stack_count(*a) - p);
+	else
+		exec_loop(a, b, "ra", p);
+	exec_opr(a, b, 0, "pb");
 }

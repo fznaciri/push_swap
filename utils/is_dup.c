@@ -6,19 +6,19 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:05:35 by mac               #+#    #+#             */
-/*   Updated: 2021/04/25 13:06:27 by mac              ###   ########.fr       */
+/*   Updated: 2021/06/24 11:46:40 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker.h"
 
-int     is_dup(char **av, int i)
+int	is_dup(char **av, int i)
 {
-    while (av[i + 1])
-    {
-        if (!ft_strcmp(av[i], av[i + 1]))
-            return 1;
-        i++;
-    }
-    return 0;
+	while (av[i + 1])
+	{
+		if (!ft_strcmp(av[i], av[i + 1]))
+			return (1);
+		i++;
+	}
+	return (0);
 }

@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   second.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 11:13:37 by mac               #+#    #+#             */
-/*   Updated: 2021/06/24 11:36:13 by fnaciri-         ###   ########.fr       */
+/*   Created: 2021/06/24 12:38:02 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/06/24 19:30:34 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 
-long	ft_atoi(const char *s)
+void	second(t_stack **a, t_stack **b, int chunks)
 {
-	int		i;
-	size_t	n;
-	int		sign;
+	int	l;
+	int	n;
 
-	sign = 1;
-	i = 0;
-	n = 0;
-	while ((s[i] >= 9 && s[i] <= 16) || s[i] == 32)
-		i++;
-	if (s[i] == '+' || s[i] == '-')
+	while (*b && chunks >= 0)
 	{
-		if (s[i] == '-')
-			sign = -1;
-		i++;
+		while (!is_chunkempty(*b, chunks))
+		{
+			n = get_pofhigher(*b, chunks);
+			l = stack_count(*b);
+			if (n == 1)
+				exec_opr(a, b, 0, "sb");
+			else if (n >= (l / 2))
+				exec_loop(a, b, "rrb", l - n);
+			else
+				exec_loop(a, b, "rb", n);
+			exec_opr(a, b, chunks, "pa");
+		}
+		chunks--;
 	}
-	while (s[i] != '\0' && (s[i] >= '0' && s[i] <= '9'))
-	{
-		n = n * 10 + s[i] - '0';
-		i++;
-	}
-	return (n * sign);
 }

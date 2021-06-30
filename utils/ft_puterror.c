@@ -6,14 +6,14 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:59:48 by mac               #+#    #+#             */
-/*   Updated: 2021/04/25 13:00:28 by mac              ###   ########.fr       */
+/*   Updated: 2021/06/24 11:40:37 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker.h"
 
-void ft_puterror()
+void	ft_puterror(void)
 {
-    ft_putendl_fd("Error", 2);
-    exit(1);    
+	ft_putendl_fd("Error", 2);
+	exit(1);
 }

@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   is_chunkempty.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:07:52 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/24 11:45:15 by fnaciri-         ###   ########.fr       */
+/*   Created: 2021/06/24 12:43:02 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/06/24 19:12:52 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 
-size_t	ft_strlen(const char *s)
+int	is_chunkempty(t_stack *a, int chunk)
 {
-	size_t	i;
+	t_stack	*tmp;
 
-	i = 0;
-	while (((char *)s)[i] != '\0')
-		i++;
-	return (i);
+	tmp = a;
+	while (tmp)
+	{
+		if (tmp->chunk == chunk)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }

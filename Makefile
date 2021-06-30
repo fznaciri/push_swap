@@ -6,7 +6,7 @@
 #    By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/18 01:48:09 by mac               #+#    #+#              #
-#    Updated: 2021/06/23 17:46:45 by fnaciri-         ###   ########.fr        #
+#    Updated: 2021/06/30 13:13:42 by fnaciri-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,21 @@ FLAGS = -Wall -Wextra -Werror
 
 NAME = push_swap
 
-SRC_C = checker.c stack.c utils/*.c
+SRC_BONUS = checker_bonus.c utils/*.c
 
-SRC_P = push_swap.c stack.c utils/*.c
+SRC = push_swap.c utils/*.c
 
 all: $(NAME)
 
 $(NAME):
-	@$(C) $(CFLAG) $(SRC_P) -o $(NAM
+	@$(C) $(CFLAG) $(SRC) -o $(NAME)
+
+bonus:
+	@$(C) $(CFLAG) $(SRC_BONUS) -o checker_bonus
 
 debug:
-	@$(C) -g -o $(NAME) $(SRC_P) -fsanitize=address
+	@$(C) $(CFLAG) -g $(SRC) -o $(NAME) -fsanitize=address
+	@$(C)  $(CFLAG) -g $(SRC_BONUS) -o checker_bonus -fsanitize=address
 
 clean:
 	@rm -f $(NAME)

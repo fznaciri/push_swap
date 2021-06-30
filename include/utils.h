@@ -6,22 +6,19 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 01:30:57 by mac               #+#    #+#             */
-/*   Updated: 2021/04/18 14:09:37 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/24 12:01:01 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include "./checker.h"
-
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <stdio.h>
+# include "./checker.h"
 # define BUFFER_SIZE 32
-
-int     gnl(int fd, char **line);
+int		gnl(int fd, char **line);
 char	*ft_strchr(const char *s, int c);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
@@ -34,5 +31,4 @@ t_opr	*ft_oplast(t_opr *lst);
 t_opr	*ft_opnew(char *content);
 void	ft_putendl_fd(char *s, int fd);
 int		ft_isdigit(int c);
-
 #endif

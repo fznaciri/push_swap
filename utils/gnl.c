@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 01:29:35 by mac               #+#    #+#             */
-/*   Updated: 2021/04/18 14:04:43 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/06/24 19:28:27 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,20 @@ char	*ft_checkerror(int fd, char **buff)
 	return (*buff);
 }
 
-int		ft_readline(int fd, char **str)
+int	ft_readline(int fd, char **str)
 {
 	char	*tmp;
 	char	*buff;
 	int		n;
 
-	if ((!(buff = malloc(BUFFER_SIZE + 1))) || (!ft_checkerror(fd, &buff)))
+	buff = malloc(BUFFER_SIZE + 1);
+	if (!buff || !ft_checkerror(fd, &buff))
 	{
 		free(buff);
 		return (-1);
 	}
-	while ((n = read(fd, buff, BUFFER_SIZE)) > 0)
+	n = read (fd, buff, BUFFER_SIZE);
+	while (n > 0)
 	{
 		buff[n] = '\0';
 		tmp = *str;
@@ -38,21 +40,36 @@ int		ft_readline(int fd, char **str)
 		free(tmp);
 		if (ft_strchr(*str, '\n'))
 			break ;
+		n = read(fd, buff, BUFFER_SIZE);
 	}
 	free(buff);
 	return (n);
 }
 
-int		gnl(int fd, char **line)
+int	clean_gnl(char **line, char **str, int n)
+{
+	if (!n && *str)
+	{
+		*line = ft_strdup(*str);
+		free(*str);
+		str = NULL;
+		return (1);
+	}
+	return (0);
+}
+
+int	gnl(int fd, char **line)
 {
 	static char	*str;
 	char		*tmp;
 	char		*s;
 	int			n;
 
-	if ((n = ft_readline(fd, &str) < 0 || !line))
+	n = ft_readline(fd, &str);
+	if (n < 0 || !line)
 		return (-1);
-	if ((s = ft_strchr(str, '\n')))
+	s = ft_strchr(str, '\n');
+	if (s)
 	{
 		*line = ft_strndup(str, s - str);
 		tmp = str;
@@ -60,13 +77,8 @@ int		gnl(int fd, char **line)
 		free(tmp);
 		return (1);
 	}
-	if (!n && str)
-	{
-		*line = ft_strdup(str);
-		free(str);
-		str = NULL;
+	if (clean_gnl(line, &str, n))
 		return (0);
-	}
 	*line = ft_strdup("");
 	return (0);
 }

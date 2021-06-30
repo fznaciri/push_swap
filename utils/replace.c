@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   replace.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:07:52 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/24 11:45:15 by fnaciri-         ###   ########.fr       */
+/*   Created: 2021/06/24 12:37:28 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/06/24 19:27:31 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 
-size_t	ft_strlen(const char *s)
+void	replace(t_stack **a)
 {
-	size_t	i;
+	t_stack	*tmp;
+	t_stack	*c;
 
-	i = 0;
-	while (((char *)s)[i] != '\0')
-		i++;
-	return (i);
+	c = copy(*a);
+	tmp = *a;
+	while (tmp)
+	{
+		tmp->value = find_position(c, tmp->value);
+		tmp = tmp->next;
+	}
+	clear_stack(&c);
 }

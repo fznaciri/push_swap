@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnaciri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:07:52 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/24 11:45:15 by fnaciri-         ###   ########.fr       */
+/*   Created: 2021/06/24 19:09:02 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/06/24 19:09:16 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 
-size_t	ft_strlen(const char *s)
+t_stack	*copy(t_stack *a)
 {
-	size_t	i;
+	t_stack	*tmp;
+	t_stack	*new;
 
-	i = 0;
-	while (((char *)s)[i] != '\0')
-		i++;
-	return (i);
+	new = NULL;
+	tmp = a;
+	while (tmp)
+	{
+		push(&new, tmp->value, tmp->chunk);
+		tmp = tmp->next;
+	}
+	return (new);
 }
