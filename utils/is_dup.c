@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_dup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:05:35 by mac               #+#    #+#             */
-/*   Updated: 2021/06/24 11:46:40 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:23:31 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 int	is_dup(char **av, int i)
 {
+	int j;
+	
+	if (!av[i + 1])
+		return (0);
+	j = i;
 	while (av[i + 1])
 	{
-		if (!ft_strcmp(av[i], av[i + 1]))
+		if (!ft_strcmp(av[j], av[i + 1]))
 			return (1);
 		i++;
 	}

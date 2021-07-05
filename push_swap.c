@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:55:59 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/06/30 15:47:21 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:22:34 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,7 @@ void	sort(t_stack **a, t_stack **b)
 		second(a, b, chunks);
 	}
 }
-void        prints(t_stack *a)
-{
-    t_stack *tmp1;
 
-    tmp1  = a;
-    printf("---------------\n");
-    while (tmp1)
-    {
-        printf("value : %d\t\tchunk : %d\n", tmp1->value, tmp1->chunk);
-        tmp1 = tmp1->next;
-    }
-    printf("---------------\n");
-}
 int	main(int ac, char **av)
 {
 	t_stack	*a;
@@ -91,9 +79,9 @@ int	main(int ac, char **av)
 	a = NULL;
 	b = NULL;
 	if (ac == 1)
-		ft_puterror();
+		return (0);
 	ac--;
-	if (ac > 1)
+	if (ac >= 1)
 	{
 		while (ac > 0)
 		{
